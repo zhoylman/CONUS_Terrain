@@ -1,17 +1,15 @@
-rm(list = ls())
-
 library(RSAGA)
 library(rgdal)
 library(raster)
 library(tictoc)
 
 #Working Directory
-setwd("H:\\Region_1_RSAGA_TWI_HUC8_SDAT")
+setwd("/mnt/ScratchDrive/data/Hoylman/CONUS_Terrain_data/raster/huc8_dems/")
 
 #Sets enviormental variables for SAGA
-env <- rsaga.env(path = 'C:\\Users\\zachary.hoylman.UM\\Downloads\\saga-7.0.0_x64\\saga-7.0.0_x64',
-                 modules = 'C:\\Users\\zachary.hoylman.UM\\Downloads\\saga-7.0.0_x64\\saga-7.0.0_x64\\tools',
-                 parallel = TRUE, cmd = "saga_cmd.exe", cores = 8)
+env <- rsaga.env(path = '/home/zhoylman/saga-7.0.0/src/saga_core/saga_cmd/',
+                 modules = '/home/zhoylman/saga-7.0.0/src/tools/',
+                 parallel = TRUE, cmd = "saga_cmd", cores = 30)
 
 #Extracts files form working directory to work though
 files = substr(list.files(pattern = "[[:digit:]].sdat", full.names = F),1,nchar(list.files(pattern = c("[[:digit:]].sdat"), full.names = F))-5)
@@ -31,10 +29,6 @@ files = files_to_process
 #Run files not already processed
 for(f in 1:length(files)){
   tic("run time")
-  #Convert tif to sgrd
-  # rsaga.geoprocessor(lib="io_gdal", module=0, param=list(GRIDS=paste(getwd(),paste(files[f], ".sgrd", sep = ""),sep="/"), 
-  #                                                        FILES=paste(getwd(),paste(files[f], ".tif", sep = ""),sep="/")), env = env)
-  # 
   #Calculate TWI
   rsaga.geoprocessor(lib="terrain_analysis", module = "Topographic Wetness Index (One Step)", env = env,
                      param=list(DEM=paste(getwd(),paste(files[f], ".sgrd", sep = ""),sep="/"), 

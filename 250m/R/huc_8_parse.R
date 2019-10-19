@@ -7,7 +7,6 @@ states = sf::st_read("/mnt/ScratchDrive/data/Hoylman/conus_TWI_data/shp/states.s
 
 states = st_transform(states, "+init=epsg:4326")
 
-
 states_west = states %>%
   dplyr::filter(STATE_ABBR %in% c("WA", "OR", "MT", "ID",
                                   "WY", "CA", "NV", "UT", 

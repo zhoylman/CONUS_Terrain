@@ -4,12 +4,12 @@ library(raster)
 library(tictoc)
 
 #Working Directory
-setwd("/mnt/ScratchDrive/data/Hoylman/CONUS_Terrain_data/raster/huc8_dems/")
+setwd("/home/zhoylman/temp/CONUS_Terrain_data/CONUS_Terrain_data/raster/huc8_dems/")
 
 #Sets enviormental variables for SAGA
-env <- rsaga.env(path = '/home/zhoylman/saga-7.0.0/src/saga_core/saga_cmd/',
-                 modules = '/home/zhoylman/saga-7.0.0/src/tools/',
-                 parallel = TRUE, cmd = "saga_cmd", cores = 30)
+env <- rsaga.env(path = '/usr/bin/',
+                 modules = '/usr/lib/x86_64-linux-gnu/saga/',
+                 parallel = TRUE, cmd = "saga_cmd", cores = 7)
 
 #Extracts files form working directory to work though
 files = substr(list.files(pattern = "[[:digit:]].sdat", full.names = F),1,nchar(list.files(pattern = c("[[:digit:]].sdat"), full.names = F))-5)
